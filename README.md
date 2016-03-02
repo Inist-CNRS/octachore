@@ -25,6 +25,7 @@ ocr.input(__dirname + '/data/test.tif')
 * output
 * lang
 * psm (page segmentation mode)
+* hocr
 
 
 ### TODO
