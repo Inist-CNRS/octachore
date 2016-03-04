@@ -37,6 +37,12 @@ describe(pkg.name + '/tesseract.js', () => {
       expect(ocr.hocr()._hocr).to.be.true
     })
   })
+  describe('#pdf', () => {
+    it('should set pdf option', () => {
+      let ocr = new Tesseract()
+      expect(ocr.pdf()._pdf).to.be.true
+    })
+  })
   describe('#exec', () => {
     it('should ocrize some tiff and give back some txt', (done) => {
       let ocr = new Tesseract()

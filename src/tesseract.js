@@ -8,6 +8,7 @@ class Tesseract {
     this._input = null
     this._output = null
     this._hocr = false
+    this._pdf = false
   }
   input(imagename) {
     this._input = imagename
@@ -29,12 +30,17 @@ class Tesseract {
     this._hocr = true
     return this
   }
+  pdf() {
+    this._pdf = true
+    return this
+  }
   exec() {
     if (!this.input || !this.output) {
       return new Error("Missing something")
     }
     let args = this.options.concat(this._input).concat(this._output).join(' ')
     if (this._hocr) args += ' hocr'
+    if (this._pdf) args += ' pdf'
     return new Promise((resolve, reject) => {
       child_process.exec('tesseract ' + args, (error, stdout, stderr) => {
         if (error) {
