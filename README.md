@@ -26,6 +26,7 @@ ocr.input(__dirname + '/data/test.tif')
 * lang
 * psm (page segmentation mode)
 * hocr
+* pdf (searchable pdf)
 
 
 ### TODO
