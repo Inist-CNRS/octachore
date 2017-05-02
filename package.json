@@ -13,10 +13,18 @@
     "node": ">=4.2.0"
   },
   "scripts": {
-    "test": "mocha --timeout==6000"
+    "test": "mocha --timeout==6000",
+    "install": "cmake-js compile",
+    "clean": "cmake-js clean",
+    "build": "cmake-js --debug build", 
+    "rebuild": "cmake-js rebuild"
   },
   "devDependencies": {
     "chai": "^3.4.0",
     "mocha": "^2.3.3"
+  },
+  "dependencies": {
+    "cmake-js": "^3.4.1",
+    "nan": "^2.6.2"
   }
 }
