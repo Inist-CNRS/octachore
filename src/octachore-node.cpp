@@ -13,26 +13,32 @@ public:
       : pathImage(pathImage), psm(psm), AsyncWorker(callback) {}
 
   // Executes in worker thread
-  void Execute() { 
+  void Execute() {
     blockBoxes = Octachore::getAllComponentImage(pathImage, static_cast<tesseract::PageIteratorLevel>(psm));
   }
   // Executes in event loop
   void HandleOKCallback() {
-    Local<Array> results = New<v8::Array>(blockBoxes->n);
-    Local<String> x_prop = Nan::New<String>("x").ToLocalChecked();
-    Local<String> y_prop = Nan::New<String>("y").ToLocalChecked();
-    Local<String> w_prop = Nan::New<String>("w").ToLocalChecked();
-    Local<String> h_prop = Nan::New<String>("h").ToLocalChecked();
-    for (int i = 0; i < blockBoxes->n; i++) {
-      Local<Object> box = Nan::New<Object>();
-      Nan::Set(box, x_prop, Nan::New<Number>(blockBoxes->box[i]->x));
-      Nan::Set(box, y_prop, Nan::New<Number>(blockBoxes->box[i]->y));
-      Nan::Set(box, w_prop, Nan::New<Number>(blockBoxes->box[i]->w));
-      Nan::Set(box, h_prop, Nan::New<Number>(blockBoxes->box[i]->h));
-      results->Set(i, box);
+    if (blockBoxes) {
+      Local<Array> results = New<v8::Array>(blockBoxes->n);
+      Local<String> x_prop = Nan::New<String>("x").ToLocalChecked();
+      Local<String> y_prop = Nan::New<String>("y").ToLocalChecked();
+      Local<String> w_prop = Nan::New<String>("w").ToLocalChecked();
+      Local<String> h_prop = Nan::New<String>("h").ToLocalChecked();
+      for (int i = 0; i < blockBoxes->n; i++) {
+        Local<Object> box = Nan::New<Object>();
+        Nan::Set(box, x_prop, Nan::New<Number>(blockBoxes->box[i]->x));
+        Nan::Set(box, y_prop, Nan::New<Number>(blockBoxes->box[i]->y));
+        Nan::Set(box, w_prop, Nan::New<Number>(blockBoxes->box[i]->w));
+        Nan::Set(box, h_prop, Nan::New<Number>(blockBoxes->box[i]->h));
+        results->Set(i, box);
+      }
+      Local<Value> argv[] = {Nan::Null(), results};
+      callback->Call(2, argv);
+    } else {
+      Local<String> error = Nan::New<String>("Cannot open input file").ToLocalChecked();
+      Local<Value> argv[] = {error};
+      callback->Call(1, argv);
     }
-    Local<Value> argv[] = {results};
-    callback->Call(1, argv);
   }
 
 private:

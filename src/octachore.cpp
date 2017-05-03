@@ -1,10 +1,14 @@
 #include "octachore.hpp"
+#include <sys/stat.h>
 #include <vector>
 
 using namespace std;
 
 string Octachore::getAllText(string imagePath, string lang, tesseract::PageSegMode psm) {
   Pix* image = pixRead(imagePath.c_str());
+  if (!image) {
+    return nullptr;
+  }
   tesseract::TessBaseAPI* api = new tesseract::TessBaseAPI();
   api->Init(NULL, lang.c_str());
   api->SetPageSegMode(psm);
@@ -18,6 +22,9 @@ string Octachore::getAllText(string imagePath, string lang, tesseract::PageSegMo
 
 Boxa* Octachore::getAllComponentImage(string imagePath, tesseract::PageIteratorLevel blockType) {
   Pix* image = pixRead(imagePath.c_str());
+  if (!image) {
+    return nullptr;
+  }
   tesseract::TessBaseAPI* api = new tesseract::TessBaseAPI();
   api->Init(NULL, "eng");
   api->SetPageSegMode(tesseract::PSM_AUTO_ONLY);

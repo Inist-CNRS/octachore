@@ -2,7 +2,7 @@
   "name": "octachore",
   "version": "0.0.2",
   "description": "Just a nodeJS wrapper for Tesseract",
-  "main": "src/tesseract.js",
+  "main": "src/octachore.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/Inist-CNRS/octachore.git"
@@ -10,13 +10,12 @@
   "author": "Rémy MEJA <remy.meja@inist.fr>",
   "license": "MIT",
   "engines": {
-    "node": ">=4.2.0"
+    "node": ">=4.0.0"
   },
   "scripts": {
-    "test": "mocha --timeout==6000",
     "install": "cmake-js compile",
     "clean": "cmake-js clean",
-    "build": "cmake-js --debug build", 
+    "build": "cmake-js --debug build",
     "rebuild": "cmake-js rebuild"
   },
   "devDependencies": {
@@ -24,6 +23,7 @@
     "mocha": "^2.3.3"
   },
   "dependencies": {
+    "bindings": "^1.2.1",
     "cmake-js": "^3.4.1",
     "nan": "^2.6.2"
   }
