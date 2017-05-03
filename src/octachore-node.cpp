@@ -13,17 +13,32 @@ public:
       : pathImage(pathImage), psm(psm), AsyncWorker(callback) {}
 
   // Executes in worker thread
-  void Execute() { std::this_thread::sleep_for(chrono::milliseconds(1000)); }
+  void Execute() { 
+    blockBoxes = Octachore::getAllComponentImage(pathImage, static_cast<tesseract::PageIteratorLevel>(psm));
+  }
   // Executes in event loop
   void HandleOKCallback() {
-    Local<Integer> codePSM = Nan::New(psm);
-    Local<Value> argv[] = {codePSM};
+    Local<Array> results = New<v8::Array>(blockBoxes->n);
+    Local<String> x_prop = Nan::New<String>("x").ToLocalChecked();
+    Local<String> y_prop = Nan::New<String>("y").ToLocalChecked();
+    Local<String> w_prop = Nan::New<String>("w").ToLocalChecked();
+    Local<String> h_prop = Nan::New<String>("h").ToLocalChecked();
+    for (int i = 0; i < blockBoxes->n; i++) {
+      Local<Object> box = Nan::New<Object>();
+      Nan::Set(box, x_prop, Nan::New<Number>(blockBoxes->box[i]->x));
+      Nan::Set(box, y_prop, Nan::New<Number>(blockBoxes->box[i]->y));
+      Nan::Set(box, w_prop, Nan::New<Number>(blockBoxes->box[i]->w));
+      Nan::Set(box, h_prop, Nan::New<Number>(blockBoxes->box[i]->h));
+      results->Set(i, box);
+    }
+    Local<Value> argv[] = {results};
     callback->Call(1, argv);
   }
 
 private:
   int psm;
   string pathImage;
+  Boxa* blockBoxes;
 };
 
 NAN_METHOD(getAllComponentImage) {
