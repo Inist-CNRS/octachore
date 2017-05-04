@@ -3,7 +3,7 @@ project(octachore)
 
 # set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
-find_package(Boost 1.58 REQUIRED COMPONENTS filesystem REQUIRED)
+find_package(Boost REQUIRED COMPONENTS filesystem REQUIRED)
 find_package(Tesseract REQUIRED)
 find_package(Leptonica REQUIRED)
 include_directories(
@@ -17,7 +17,6 @@ include_directories(
 message(dir: "${PROJECT_SOURCE_DIR}")
 file(GLOB SOURCE_FILES "src/*.cpp" "src/*.hpp")
 add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
-message(cmake js lib : "${CMAKE_JS_LIB}")
 target_link_libraries(${PROJECT_NAME} ${CMAKE_JS_LIB})
 target_link_libraries(${PROJECT_NAME} ${TESSERACT_LIBRARY})
 target_link_libraries(${PROJECT_NAME} ${LEPTONICA_LIBRARY})
@@ -27,7 +26,6 @@ set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "" SUFFIX ".node")
 
 # Essential include files to build a node addon,
 # You should add this line in every CMake.js based project
-message(cmake js inc : "${CMAKE_JS_INC}")
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_JS_INC})
 
 # Essential library files to link to a node addon
