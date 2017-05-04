@@ -1,5 +1,6 @@
 FIND_PATH(TESSERACT_INCLUDE_DIRS
         baseapi.h
+        /usr/local/include/tesseract
         /usr/include/tesseract
         )
 MESSAGE(STATUS "TESSERACT_INCLUDE_DIRS: ${TESSERACT_INCLUDE_DIRS}")
@@ -7,6 +8,7 @@ MESSAGE(STATUS "TESSERACT_INCLUDE_DIRS: ${TESSERACT_INCLUDE_DIRS}")
 FIND_LIBRARY(TESSERACT_LIBRARY
         NAMES tesseract tesseract_api
         PATHS
+        /usr/local/lib
         /usr/lib
         /usr/lib64
         )

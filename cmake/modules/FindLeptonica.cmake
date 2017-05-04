@@ -1,5 +1,6 @@
 FIND_PATH(LEPTONICA_INCLUDE_DIRS
         allheaders.h
+        /usr/local/include/leptonica
         /usr/include/leptonica
         )
 MESSAGE(STATUS "LEPTONICA_INCLUDE_DIRS: ${LEPTONICA_INCLUDE_DIRS}")
@@ -7,6 +8,7 @@ MESSAGE(STATUS "LEPTONICA_INCLUDE_DIRS: ${LEPTONICA_INCLUDE_DIRS}")
 FIND_LIBRARY(LEPTONICA_LIBRARY
         NAMES lept
         PATHS
+        /usr/local/lib
         /usr/lib
         /usr/lib64
         )
