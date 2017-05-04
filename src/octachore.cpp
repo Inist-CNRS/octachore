@@ -29,7 +29,7 @@ Boxa* Octachore::getAllComponentImage(string imagePath, tesseract::PageIteratorL
   api->Init(NULL, "eng");
   api->SetPageSegMode(tesseract::PSM_AUTO_ONLY);
   api->SetImage(image);
-  Boxa* boxes = api->GetComponentImages(blockType, true, NULL, NULL);
+  Boxa* boxes = api->GetComponentImages(blockType, false, NULL, NULL);
   api->End();
   pixDestroy(&image);
   return boxes;
