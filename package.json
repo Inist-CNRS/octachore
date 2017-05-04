@@ -1,6 +1,6 @@
 {
   "name": "octachore",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Just a nodeJS wrapper for Tesseract",
   "main": "src/octachore.js",
   "repository": {
