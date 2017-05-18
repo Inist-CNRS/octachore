@@ -27,6 +27,7 @@ Boxa* Octachore::getAllComponentImage(string imagePath, tesseract::PageIteratorL
   }
   tesseract::TessBaseAPI* api = new tesseract::TessBaseAPI();
   api->Init(NULL, "eng");
+  api->SetVariable("debug_file", "/dev/null");
   api->SetPageSegMode(tesseract::PSM_AUTO_ONLY);
   api->SetImage(image);
   Boxa* boxes = api->GetComponentImages(blockType, false, NULL, NULL);
