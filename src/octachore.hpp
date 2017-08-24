@@ -2,16 +2,23 @@
 #define OCTACHORE_H
 
 #include <leptonica/allheaders.h>
+#include <nan.h>
 #include <string>
 #include <tesseract/baseapi.h>
 
-namespace Octachore {
-std::string getAllText(std::string imagePath, std::string lang, tesseract::PageSegMode psm);
-struct boxComponentImage {
-  std::string name;
-  Boxa* box;
+class Octachore : public Nan::ObjectWrap {
+public:
+  static void Init(v8::Local<v8::Object> exports);
+
+private:
+  explicit Octachore();
+  ~Octachore();
+  static void New(const Nan::FunctionCallbackInfo<v8::Value>& info);
+  static inline Nan::Persistent<v8::Function>& constructor();
+  static void load(const Nan::FunctionCallbackInfo<v8::Value>& info);
+  static void getAllText(const Nan::FunctionCallbackInfo<v8::Value>& info);
+  Pix* image;
+  tesseract::TessBaseAPI* api;
 };
-Boxa* getAllComponentImage(std::string imagePath, tesseract::PageIteratorLevel blockType);
-}
 
 #endif // !OCTACHORE_H

@@ -11,7 +11,7 @@ include_directories(
         ${TESSERACT_INCLUDE_DIRS}
         ${LEPTONICA_INCLUDE_DIRS}
         ${CMAKE_SOURCE_DIR}/src
-        ${PROJECT_SOURCE_DIR}/node_modules/nan
+        ${CMAKE_JS_INC}
 )
 
 message(dir: "${PROJECT_SOURCE_DIR}")
