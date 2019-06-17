@@ -16,7 +16,7 @@
     "test": "mocha --timeout==6000"
   },
   "devDependencies": {
-    "chai": "^3.4.0",
-    "mocha": "^2.3.3"
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4"
   }
 }
